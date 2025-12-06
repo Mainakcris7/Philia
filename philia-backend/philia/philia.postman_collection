@@ -1,0 +1,856 @@
+{
+	"info": {
+		"_postman_id": "689e484e-6213-4379-8a8f-564eee743782",
+		"name": "Philia - Social Media App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42081167",
+		"_collection_link": "https://pod-3-api-testing.postman.co/workspace/POD-3-API-testing-Workspace~39154249-f090-4c6e-af45-fbfd52a3b1c9/collection/42081167-689e484e-6213-4379-8a8f-564eee743782?action=share&source=collection_link&creator=42081167"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "notifications",
+					"item": [
+						{
+							"name": "get notifications by user id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{philia_users}}/2/notifications",
+									"host": [
+										"{{philia_users}}"
+									],
+									"path": [
+										"2",
+										"notifications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "read all notifications",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{philia_users}}/{id}/notifications/read/all",
+									"host": [
+										"{{philia_users}}"
+									],
+									"path": [
+										"{id}",
+										"notifications",
+										"read",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "read notification by id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{philia_users}}/{id}/notifications/read/{notificationId}",
+									"host": [
+										"{{philia_users}}"
+									],
+									"path": [
+										"{id}",
+										"notifications",
+										"read",
+										"{notificationId}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "clear notification by id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{philia_users}}/{id}/notifications/delete/{notificationId}",
+									"host": [
+										"{{philia_users}}"
+									],
+									"path": [
+										"{id}",
+										"notifications",
+										"delete",
+										"{notificationId}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "clear all notifications",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{philia_users}}/{userId}/notifications/delete/all",
+									"host": [
+										"{{philia_users}}"
+									],
+									"path": [
+										"{userId}",
+										"notifications",
+										"delete",
+										"all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prompt\": \"Tell me the best way to start a new day\"\r\n}"
+						},
+						"url": {
+							"raw": "{{philia_users}}",
+							"host": [
+								"{{philia_users}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_users}}/profile/4",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"profile",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get profile image by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_users}}/profile/8/image",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"profile",
+								"8",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userData",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/user.json"
+								},
+								{
+									"key": "profileImage",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/squirrel.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{philia_users}}/register",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userData",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/user_update.json"
+								},
+								{
+									"key": "profileImage",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/squirrel2.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{philia_users}}",
+							"host": [
+								"{{philia_users}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send friend request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prompt\": \"Tell me the best way to start a new day\"\r\n}"
+						},
+						"url": {
+							"raw": "{{philia_users}}/2/friends/send/3",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"2",
+								"friends",
+								"send",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accept friend request",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prompt\": \"Tell me the best way to start a new day\"\r\n}"
+						},
+						"url": {
+							"raw": "{{philia_users}}/3/friends/accept/2",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"3",
+								"friends",
+								"accept",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reject friend request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYXJhdi5zaGFybWFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NjI2MDEzMDAsImV4cCI6MTc2MzIwNjEwMH0.C5xjHtLEOxSZtFKUD1oe0J8KAryLQZ8n9NHpSrWlbuE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prompt\": \"Tell me the best way to start a new day\"\r\n}"
+						},
+						"url": {
+							"raw": "{{philia_users}}/2/friends/reject/2",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"2",
+								"friends",
+								"reject",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel friend request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prompt\": \"Tell me the best way to start a new day\"\r\n}"
+						},
+						"url": {
+							"raw": "{{philia_users}}/{userId}/friends/cancel/{receiverId}",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"{userId}",
+								"friends",
+								"cancel",
+								"{receiverId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove friend",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prompt\": \"Tell me the best way to start a new day\"\r\n}"
+						},
+						"url": {
+							"raw": "{{philia_users}}/3/friends/remove/2",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"3",
+								"friends",
+								"remove",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYXJhdi5zaGFybWFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NjI2Njc1NjIsImV4cCI6MTc2MzI3MjM2Mn0.4WaM7uoEFdTu58H2u_v8tSj7IbgNcWQ1mgWh96VWDCE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prompt\": \"Tell me the best way to start a new day\"\r\n}"
+						},
+						"url": {
+							"raw": "{{philia_users}}/5",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get posts by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_users}}/profile/2/posts",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"profile",
+								"2",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"mainakcr72@gmail.com\",\r\n    \"password\": \"Mainak@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{philia_users}}/auth/login",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get otp before register",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_users}}/auth/pre-register/otp/send?email=mainakcr72@gmail.com",
+							"host": [
+								"{{philia_users}}"
+							],
+							"path": [
+								"auth",
+								"pre-register",
+								"otp",
+								"send"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "mainakcr72@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "get all posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_posts}}",
+							"host": [
+								"{{philia_posts}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_posts}}/1",
+							"host": [
+								"{{philia_posts}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post image by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_posts}}/3/image",
+							"host": [
+								"{{philia_posts}}"
+							],
+							"path": [
+								"3",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "postData",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/post.json"
+								},
+								{
+									"key": "postImage",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{philia_posts}}",
+							"host": [
+								"{{philia_posts}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "like post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{philia_posts}}/{postId}/likes/add/{userId}",
+							"host": [
+								"{{philia_posts}}"
+							],
+							"path": [
+								"{postId}",
+								"likes",
+								"add",
+								"{userId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYXJhdi5zaGFybWFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NjI2MDUyMTEsImV4cCI6MTc2MzIxMDAxMX0.tXPR-28QKb3NWFlwlkR-4pfWV2lgI-wCGLRDTVUdm1o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "postData",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/postUpdate.json"
+								},
+								{
+									"key": "postImage",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/girl.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{philia_posts}}",
+							"host": [
+								"{{philia_posts}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove like from post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{philia_posts}}/{postId}/likes/remove/{userId}",
+							"host": [
+								"{{philia_posts}}"
+							],
+							"path": [
+								"{postId}",
+								"likes",
+								"remove",
+								"{userId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcmp1bi5zaGFybWFAZXhhbXBsZS5jb20iLCJpYXQiOjE3NjI2ODAzODgsImV4cCI6MTc2MzI4NTE4OH0.d-6-I7G97yQ5fp0UN5-Pmkwe-D7KTJHAOw1cscppAO8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{philia_posts}}/6",
+							"host": [
+								"{{philia_posts}}"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "get comment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_comments}}/{id}",
+							"host": [
+								"{{philia_comments}}"
+							],
+							"path": [
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comments by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{philia_comments}}/posts/{postId}",
+							"host": [
+								"{{philia_comments}}"
+							],
+							"path": [
+								"posts",
+								"{postId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add comment to post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": 1,\r\n    \"userId\": 3,\r\n    \"content\": \"Nice\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{philia_comments}}",
+							"host": [
+								"{{philia_comments}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{philia_comments}}",
+							"host": [
+								"{{philia_comments}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add like to comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWluYWtjcjcyQGdtYWlsLmNvbSIsImlhdCI6MTc2MjY4MTgzMiwiZXhwIjoxNzYzMjg2NjMyfQ.scBSAYFIHFQXZAIo1z6DbNI9XDN3b5Yq3dP3p4jde6U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{philia_comments}}/2/likes/add/10",
+							"host": [
+								"{{philia_comments}}"
+							],
+							"path": [
+								"2",
+								"likes",
+								"add",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove like from comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{philia_comments}}/{commentId}/likes/remove/{userId}",
+							"host": [
+								"{{philia_comments}}"
+							],
+							"path": [
+								"{commentId}",
+								"likes",
+								"remove",
+								"{userId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{philia_comments}}/{commentId}",
+							"host": [
+								"{{philia_comments}}"
+							],
+							"path": [
+								"{commentId}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "App",
+			"item": [
+				{
+					"name": "search users and posts by keyword",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/search/scam",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"search",
+								"scam"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "philia_users",
+			"value": "localhost:8080/users",
+			"type": "default"
+		},
+		{
+			"key": "philia_posts",
+			"value": "localhost:8080",
+			"type": "default"
+		},
+		{
+			"key": "philia_comments",
+			"value": "localhost:8080/comments",
+			"type": "default"
+		}
+	]
+}
