@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import CircleLoading from "../loaders/CircleLoading";
+import { enhanceCaption } from "../../shared/services/api";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { commentSchema } from "../../schema/forms";
 import type z from "zod";
+import { tones } from "../../shared/constants/AiTones";
 
 export default function UpdateComment({
   commentContent,
@@ -21,6 +23,25 @@ export default function UpdateComment({
   isLoading: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [toneIndex, setToneIndex] = useState(0);
+  const [isEnhancing, setIsEnhancing] = useState(false);
+  const [content, setContent] = useState<string>(commentContent);
+
+  const handleToneChange = () => {
+    setToneIndex((t) => (t + 1) % tones.length);
+  };
+
+  const handleEnhanceComment = async () => {
+    try {
+      setIsEnhancing(true);
+      const enhanced = await enhanceCaption(content.trim(), tones[toneIndex]);
+      setContent(enhanced.trim());
+    } catch (err) {
+      console.error("Error enhancing comment:", err);
+    } finally {
+      setIsEnhancing(false);
+    }
+  };
 
   const {
     register,
@@ -44,11 +65,13 @@ export default function UpdateComment({
     setOpen(false);
     setShowOptions(false);
     reset({ content: commentContent });
+    setContent(commentContent);
   };
 
   useEffect(() => {
     // Reset form when comment content changes
     reset({ content: commentContent });
+    setContent(commentContent);
   }, [commentContent, reset]);
 
   return (
@@ -76,16 +99,47 @@ export default function UpdateComment({
           <form onSubmit={handleSubmit(handleEditComment)}>
             {/* Comment Input */}
             <div className="flex flex-col">
-              <textarea
-                {...register("content")}
-                className={`w-full p-3 rounded border-2 text-white outline-none focus:border-blue-400 ${
-                  errors.content
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-white/20"
-                }`}
-                rows={3}
-                placeholder="Write your comment..."
-              />
+              <div className="relative">
+                <textarea
+                  {...register("content")}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  className={`w-full p-3 rounded border-2 text-white outline-none focus:border-blue-400 ${
+                    errors.content
+                      ? "border-red-400 focus:border-red-500"
+                      : "border-white/20"
+                  }`}
+                  rows={3}
+                  placeholder="Write your comment..."
+                />
+                {content.trim().length > 0 && (
+                  <>
+                    <button
+                      type="button"
+                      className="absolute text-xs bottom-3 right-17 px-1.5 pr-1 py-1 rounded-full text-white bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer hover:bg-white/20 hover:shadow-lg hover:shadow-white/10 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+                      onClick={handleEnhanceComment}
+                      disabled={isLoading || isEnhancing}
+                    >
+                      {isEnhancing ? (
+                        <div className="flex justify-center items-center gap-1">
+                          Enhancing <CircleLoading width="13" height="13" />
+                        </div>
+                      ) : (
+                        "Enhance ✨"
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      className="absolute text-xs bottom-3 right-2 px-1.5 py-1 rounded-full text-white bg-white/10 backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer hover:bg-white/20 hover:shadow-lg hover:shadow-white/10 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+                      onClick={handleToneChange}
+                      disabled={isLoading || isEnhancing}
+                    >
+                      {tones[toneIndex]}
+                    </button>
+                  </>
+                )}
+              </div>
               {errors.content && (
                 <p className="text-red-500 text-sm mt-1">
                   {errors.content.message}

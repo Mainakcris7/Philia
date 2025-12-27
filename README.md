@@ -2,7 +2,7 @@
 
 # Philia - Social Media App
 
-> A modern, full-stack social media platform built with React, TypeScript, and Spring Boot.
+> A modern, full-stack social media platform with AI-powered features built with React, TypeScript, and Spring Boot.
 
 [![React](https://img.shields.io/badge/React-19.1.1-blue?logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -13,6 +13,7 @@
 [![Gradle](https://img.shields.io/badge/Gradle-8.5-blue?logo=gradle)](https://gradle.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?logo=mysql)](https://www.mysql.com/)
 [![Hibernate](https://img.shields.io/badge/Hibernate-6.2-orange?logo=hibernate)](https://hibernate.org/)
+[![Spring AI](https://img.shields.io/badge/Spring%20AI-LLM-blueviolet)](https://spring.io/projects/spring-ai)
 
 ## ✨ Features
 
@@ -25,6 +26,7 @@
 - 📈 **Trending** - Discover trending posts and popular content
 - 👤 **Profiles** - View and edit user profiles
 - 🎨 **Dark Theme** - Beautiful modern dark UI with glass-morphism effects
+- 🤖 **AI-Powered Enhancement** - AI-driven caption and comment enhancement with multiple tone selection (Casual, Formal, Funny, etc.)
 
 ## 🛠️ Tech Stack (Frontend)
 
@@ -231,6 +233,7 @@ Welcome to the backend of **Philia**, a modern social media platform designed to
 ### Tech Stack
 - **Java 21**: The primary programming language.
 - **Spring Boot 3.5.7**: Framework for building the backend application.
+- **Spring AI 1.1.2**: LLM integration for AI-powered content enhancement.
 - **Hibernate**: ORM tool for database interactions.
 - **MySQL Database**: MySQL database for storing data.
 - **Gradle**: Build automation tool.

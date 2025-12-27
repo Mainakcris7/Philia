@@ -1,4 +1,4 @@
-import { axiosInstance } from "../config/axiosconfig";
+import { axiosAuthInstance, axiosInstance } from "../config/axiosconfig";
 import type { SearchResultType } from "../types/app/SearchResult";
 
 const API_URL = "/api";
@@ -9,3 +9,13 @@ export const searchByKeyword = async (keyword: string) => {
   );
   return result.data;
 };
+
+export const enhanceCaption = async (caption: string, tone: string) => {
+  const result = await axiosAuthInstance.get<string>(
+    `${API_URL}/ai/enhance-caption`,
+    {
+      params: { caption, tone },
+    }
+  );
+  return result.data;
+}

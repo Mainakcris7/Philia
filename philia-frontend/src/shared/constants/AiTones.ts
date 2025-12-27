@@ -1,0 +1,1 @@
+export const tones: readonly string[] = ["Casual", "Formal", "Funny"];
