@@ -62,7 +62,7 @@ export default function Post() {
         ) : comments && comments.length > 0 ? (
           <>
             <h1 className="font-semibold text-2xl text-center">Comments</h1>
-            <div className="comments mt-2 flex flex-col gap-8 mb-8">
+            <div className="comments mt-2 flex flex-col gap-8 mb-12">
               {comments.map((comment) => (
                 <CommentCard key={comment.id} comment={comment} />
               ))}

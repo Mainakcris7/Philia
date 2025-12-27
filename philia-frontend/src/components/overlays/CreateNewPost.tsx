@@ -17,11 +17,16 @@ import { postSchema } from "../../schema/forms";
 import type z from "zod";
 import { toast, Bounce } from "react-toastify";
 import type { AxiosError } from "axios";
+import { enhanceContent } from "../../shared/services/api";
+import { tones } from "../../shared/constants/AiTones";
 
 export default function CreateNewPost() {
   const [open, setOpen] = useState(false);
+  const [caption, setCaption] = useState("");
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [toneIndex, setToneIndex] = useState(0);
   // For preview loading
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
 
@@ -87,6 +92,32 @@ export default function CreateNewPost() {
       });
     },
   });
+
+  const handleToneChange = () => {
+    const nextTone = (toneIndex + 1) % tones.length;
+    setToneIndex(nextTone);
+  };
+
+  const handleEnhanceCaption = async () => {
+    try {
+      setLoading(true);
+      const enhancedCaption = await enhanceContent(
+        caption.trim(),
+        tones[toneIndex],
+        "Caption"
+      );
+      setCaption(enhancedCaption.trim());
+    } catch (err) {
+      console.error("Error enhancing caption:", err);
+      return;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCaptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCaption(e.target.value);
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -177,16 +208,52 @@ export default function CreateNewPost() {
           <form onSubmit={handleSubmit(handlePost)}>
             {/* Caption Input */}
             <div className="flex flex-col">
-              <textarea
-                {...register("caption")}
-                className={`w-full p-3 rounded border-2 text-white outline-none focus:border-blue-400 ${
-                  errors.caption
-                    ? "border-red-400 focus:border-red-500"
-                    : "border-white/20"
-                }`}
-                rows={3}
-                placeholder="Write a caption..."
-              />
+              <div className="caption-input relative">
+                <textarea
+                  {...register("caption")}
+                  onChange={handleCaptionChange}
+                  value={caption}
+                  className={`w-full p-3 rounded border-2 text-white outline-none focus:border-blue-400 ${
+                    errors.caption
+                      ? "border-red-400 focus:border-red-500"
+                      : "border-white/20"
+                  }`}
+                  rows={3}
+                  placeholder="Write a caption..."
+                />
+                {caption.trim().length > 0 && (
+                  <>
+                    <button
+                      type="button"
+                      className="absolute text-xs bottom-3 right-17 px-1.5 pr-1 py-1 rounded-full text-white bg-white/10 backdrop-blur-md border border-white/20
+                    transition-all duration-300 cursor-pointer
+                    hover:bg-white/20 hover:shadow-lg hover:shadow-white/10
+                    active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+                      disabled={loading}
+                      onClick={handleEnhanceCaption}
+                    >
+                      {loading ? (
+                        <div className="flex justify-center items-center gap-1">
+                          Enhancing <CircleLoading width="13" height="13" />
+                        </div>
+                      ) : (
+                        "Enhance ✨"
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      className="absolute text-xs bottom-3 right-2 px-1.5 py-1 rounded-full text-white bg-white/10 backdrop-blur-md border border-white/20
+                    transition-all duration-300 cursor-pointer
+                    hover:bg-white/20 hover:shadow-lg hover:shadow-white/10
+                    active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+                      onClick={handleToneChange}
+                      disabled={loading}
+                    >
+                      {tones[toneIndex]}
+                    </button>
+                  </>
+                )}
+              </div>
               {errors.caption && (
                 <p className="text-red-500 text-sm mt-1">
                   {errors.caption.message}
