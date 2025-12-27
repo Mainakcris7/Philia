@@ -144,6 +144,7 @@ Welcome to the backend of **Philia**, a modern social media platform designed to
 
 #### `/api`
 - **GET** `/search/{keyword}`: Search for content by keyword.
+- **GET** `/ai/enhance-content`: Enhance content (caption, comment) using AI with specified tone.
 
 ### User Endpoints 👤
 
