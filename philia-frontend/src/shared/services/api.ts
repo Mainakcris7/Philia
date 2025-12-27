@@ -10,11 +10,11 @@ export const searchByKeyword = async (keyword: string) => {
   return result.data;
 };
 
-export const enhanceCaption = async (caption: string, tone: string) => {
+export const enhanceContent = async (content: string, tone: string, type: string) => {
   const result = await axiosAuthInstance.get<string>(
-    `${API_URL}/ai/enhance-caption`,
+    `${API_URL}/ai/enhance-content`,
     {
-      params: { caption, tone },
+      params: { content, tone, type },
     }
   );
   return result.data;

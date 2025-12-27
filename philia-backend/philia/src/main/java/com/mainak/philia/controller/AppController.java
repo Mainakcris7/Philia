@@ -19,12 +19,13 @@ public class AppController {
         return service.searchByKeyword(keyword);
     }
 
-    @GetMapping("/ai/enhance-caption")
+    @GetMapping("/ai/enhance-content")
     public ResponseEntity<String> enhancePrompt(
-            @RequestParam("caption") String caption,
-            @RequestParam("tone") String tone
+            @RequestParam("content") String content,
+            @RequestParam("tone") String tone,
+            @RequestParam("type") String type
     ){
-        return aiService.enhanceCaption(caption, tone);
+        return aiService.enhanceContent(content, tone, type);
     }
 
 }

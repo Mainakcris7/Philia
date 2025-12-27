@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import CircleLoading from "../loaders/CircleLoading";
-import { enhanceCaption } from "../../shared/services/api";
+import { enhanceContent } from "../../shared/services/api";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { commentSchema } from "../../schema/forms";
@@ -34,7 +34,11 @@ export default function UpdateComment({
   const handleEnhanceComment = async () => {
     try {
       setIsEnhancing(true);
-      const enhanced = await enhanceCaption(content.trim(), tones[toneIndex]);
+      const enhanced = await enhanceContent(
+        content.trim(),
+        tones[toneIndex],
+        "Comment"
+      );
       setContent(enhanced.trim());
     } catch (err) {
       console.error("Error enhancing comment:", err);

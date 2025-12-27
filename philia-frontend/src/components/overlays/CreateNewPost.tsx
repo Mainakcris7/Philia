@@ -17,7 +17,7 @@ import { postSchema } from "../../schema/forms";
 import type z from "zod";
 import { toast, Bounce } from "react-toastify";
 import type { AxiosError } from "axios";
-import { enhanceCaption } from "../../shared/services/api";
+import { enhanceContent } from "../../shared/services/api";
 import { tones } from "../../shared/constants/AiTones";
 
 export default function CreateNewPost() {
@@ -101,9 +101,10 @@ export default function CreateNewPost() {
   const handleEnhanceCaption = async () => {
     try {
       setLoading(true);
-      const enhancedCaption = await enhanceCaption(
+      const enhancedCaption = await enhanceContent(
         caption.trim(),
-        tones[toneIndex]
+        tones[toneIndex],
+        "Caption"
       );
       setCaption(enhancedCaption.trim());
     } catch (err) {

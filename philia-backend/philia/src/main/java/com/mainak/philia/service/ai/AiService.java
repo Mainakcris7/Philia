@@ -38,36 +38,37 @@ public class AiService {
                 .build();
     }
 
-    public ResponseEntity<String> enhanceCaption(String caption, String tone){
+    public ResponseEntity<String> enhanceContent(String content, String tone, String type){
         try{
-            String enhancedCaption = this.chatClient
+            String enhancedContent = this.chatClient
                     .prompt()
                     .system("""
-                        You are an AI assistant in a Social Media application.
-                        Your task is to enhance the given post caption.
+                        Your task is to enhance the given post caption/comment (Based on the type).
                 
                         Rules:
-                        - Enhance the caption strictly based on the provided tone.
+                        - Enhance the caption/comment strictly based on the provided tone.
                         - Preserve the original meaning and intent.
                         - Do NOT add new facts, assumptions, or context.
                         - Do NOT add extra emojis, hashtags, or extra content unless explicitly implied by the tone.
                         - Keep the output concise and natural.
-                        - Return ONLY the enhanced caption text.
+                        - Return ONLY the enhanced caption/comment text.
                     """)
                     .user(u ->
                             u.text("""
-                                        Caption: {caption}
+                                        Type: {type}
+                                        Content: {content}
                                         Tone: {tone}
                                     """)
                                 .params(Map.of(
-                                        "caption", caption,
+                                        "type", type,
+                                        "content", content,
                                         "tone", tone
                                 ))
                     )
                     .call()
                     .content();
 
-            return ResponseEntity.ok(enhancedCaption);
+            return ResponseEntity.ok(enhancedContent);
         }catch (Exception e){
             throw new AppException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

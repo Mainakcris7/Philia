@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux/store/store";
 import type { Post } from "../../shared/types/post/Post";
 import CircleLoading from "../loaders/CircleLoading";
-import { enhanceCaption } from "../../shared/services/api";
+import { enhanceContent } from "../../shared/services/api";
 import { tones } from "../../shared/constants/AiTones";
 
 export default function CommentInput({ postId }: { postId: number }) {
@@ -75,7 +75,11 @@ export default function CommentInput({ postId }: { postId: number }) {
   const handleEnhanceComment = async () => {
     try {
       setIsEnhancing(true);
-      const enhanced = await enhanceCaption(comment.trim(), tones[toneIndex]);
+      const enhanced = await enhanceContent(
+        comment.trim(),
+        tones[toneIndex],
+        "Comment"
+      );
       setComment(enhanced.trim());
     } catch (err) {
       console.error("Error enhancing comment:", err);

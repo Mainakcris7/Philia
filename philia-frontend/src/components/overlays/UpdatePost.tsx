@@ -9,7 +9,7 @@ import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import { APP_CONFIG } from "../../shared/config/appconfig";
 import CircleLoading from "../loaders/CircleLoading";
-import { enhanceCaption } from "../../shared/services/api";
+import { enhanceContent } from "../../shared/services/api";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postSchema } from "../../schema/forms";
@@ -44,7 +44,11 @@ export default function UpdatePost({
   const handleEnhanceCaption = async () => {
     try {
       setIsEnhancing(true);
-      const enhanced = await enhanceCaption(caption.trim(), tones[toneIndex]);
+      const enhanced = await enhanceContent(
+        caption.trim(),
+        tones[toneIndex],
+        "Caption"
+      );
       setCaption(enhanced.trim());
     } catch (err) {
       console.error("Error enhancing caption:", err);
